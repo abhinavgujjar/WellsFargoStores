@@ -1,6 +1,5 @@
 'use strict';
 
-
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
 	'ngRoute',
@@ -15,9 +14,9 @@ config(['$routeProvider',
 			templateUrl: 'partials/listing.html',
 			controller: "listingController"
 		});
-		$routeProvider.when('/grid', {
-			templateUrl: 'partials/grid.html',
-			controller: "listingController"
+		$routeProvider.when('/details', {
+			templateUrl: 'partials/details.html',
+			controller: "detailsController"
 		});
 		$routeProvider.when('/new', {
 			templateUrl: 'partials/new.html',
