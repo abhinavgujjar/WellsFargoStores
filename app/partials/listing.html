@@ -3,7 +3,9 @@
 			<div class="row">
 				<div class="col-md-2">
 					<img ng-src="http://i.imgur.com/{{hotel.image}}" width="70px"></div>
-				<div class="col-md-2">{{hotel.name}}</div>
+				<div class="col-md-2">
+					<a href="#/details/{{hotel.id}}" ng-click="selectHotel(hotel)">{{hotel.name}}</a>
+				</div>
 				<div class="col-md-3">{{hotel.location}}</div>
 				<div class="col-md-5">
 					<span ng-show="!showMore">

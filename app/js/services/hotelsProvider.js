@@ -1,49 +1,42 @@
 angular.module('myApp.services')
-	.factory('hotelsProvider', [
+	.factory('hotelsProvider', ['$http',
 
-		function() {
+		function($http) {
 
-			var hotels = [{
-				name: 'Novotel',
-				image: 'eakmUwL.jpg',
-				location: 'Madhapur',
-				rating: 3,
-				description: 'Lorem ipsum habitasse non lobortis nostra turpis maecenas, vitae lorem viverra conubia vitae leo, quisque nulla pharetra congue senectus pellentesque elementum posuere nostra himenaeos non vivamus leo nibh rhoncus mollis.'
-			}, {
-				name: 'Katriya Hotel',
-				image: 'eakmUwL.jpg',
-				location: 'Madhapur',
-				rating: 3,
-				description: 'Lorem ipsum habitasse non lobortis nostra turpis maecenas, vitae lorem viverra conubia vitae leo, quisque nulla pharetra congue senectus pellentesque elementum posuere nostra himenaeos non vivamus leo nibh rhoncus mollis.'
-			}, {
-				name: 'Radisson ',
-				image: 'cVBnPDl.jpg',
-				location: 'Hitec City',
-				rating: 3,
-				description: 'Semper quis donec inceptos himenaeos sem convallis scelerisque fames pretium posuere, non praesent ut pellentesque varius feugiat luctus velit sem neque auctor id rutrum tortor pretium lacinia platea scelerisque leo commodo justo diam etiam.'
-			}, {
-				name: 'Park Hyatt',
-				image: 'wHgAXz9.jpg',
-				location: 'Banjara Hills',
-				rating: 3,
-				description: 'Tincidunt a curae ipsum nunc aliquet sapien aenean quisque et, non turpis conubia tempor curabitur eget malesuada consequat inceptos, libero metus elit molestie tellus venenatis amet himenaeos ut donec phasellus quisque rutrum vivamus curabitur cursus.'
-			}, {
-				name: 'Westin',
-				image: 'y19ueIO.jpg',
-				location: 'Gachibowli',
-				rating: 3,
-				description: 'Congue elementum dictumst mattis odio curae pretium viverra fames, sed eros orci sollicitudin fermentum convallis fringilla risus, rhoncus tincidunt commodo nisl fusce ad interdum amet proin facilisis vel quisque integer laoreet blandit tristique fames.'
-			}];
 
-			function internalAddHotel(hotel){
+			function internalAddHotel(hotel) {
 				hotels.push(hotel);
+			}
+
+			var selectedHotel;
+
+			function getHotel(id) {
+				var targeHotel;
+
+				angular.forEach(hotels, function(item) {
+					if (item.id === id) {
+						targeHotel = item;
+					}
+				});
+
+				return targeHotel;
 			}
 
 			return {
 				getHotels: function() {
-					return hotels;
+					return $http.get('data/hotels.json', {
+						headers: [{
+							"userName": "abhinav"
+						}],
+						transformResponse: function(data) {
+							var raw = angular.fromJson(data);
+							return raw.result;
+						}
+					});
 				},
-				addHotel : internalAddHotel
+				addHotel: internalAddHotel,
+				selectedHotel: selectedHotel,
+				findHotel: getHotel
 			}
 
 

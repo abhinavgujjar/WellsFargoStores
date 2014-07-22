@@ -1,9 +1,20 @@
 
 angular.module('myApp.controllers')
-	.controller('listingController', ['$scope', 'hotelsProvider',
-		function($scope, hotelsProvider) {
+	.controller('listingController', ['$scope', 'hotelsProvider', '$location','fbLogin',
+		function($scope, hotelsProvider, $location, fbLogin) {
 
-			$scope.hotels = hotelsProvider.getHotels();
+			console.log(fbLogin);
+
+			hotelsProvider.getHotels().success(function(data){
+				$scope.hotels = data;
+			});
+
+			
+			$scope.selectHotel = function(hotel){
+				hotelsProvider.selectedHotel = hotel;
+
+				$location.url('/details');
+			}
 
 		}
 	])

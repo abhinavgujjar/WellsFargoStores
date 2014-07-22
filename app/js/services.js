@@ -8,4 +8,5 @@
 angular.module('myApp.services', []).
 	value('version', '0.1')
 	.value('wordlimitConfig', 10)
+	.value('fbLogin', fbLoginId)
 ;

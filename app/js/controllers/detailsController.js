@@ -1,9 +1,11 @@
 
 angular.module('myApp.controllers')
-	.controller('detailsController', ['$scope', 'hotelsProvider',
-		function($scope, hotelsProvider) {
+	.controller('detailsController', ['$scope', 'hotelsProvider', '$routeParams',
+		function($scope, hotelsProvider, $routeParams) {
 
-			$scope.hotels = hotelsProvider.getHotels();
+			console.log($routeParams.id);
+
+			$scope.hotel = hotelsProvider.findHotel($routeParams.id);
 
 		}
 	])

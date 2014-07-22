@@ -3,6 +3,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
 	'ngRoute',
+	'ngResource',
 	'myApp.filters',
 	'myApp.services',
 	'myApp.directives',
@@ -14,7 +15,7 @@ config(['$routeProvider',
 			templateUrl: 'partials/listing.html',
 			controller: "listingController"
 		});
-		$routeProvider.when('/details', {
+		$routeProvider.when('/details/:id', {
 			templateUrl: 'partials/details.html',
 			controller: "detailsController"
 		});
