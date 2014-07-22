@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7">
+  <![endif]-->
+  <!--[if IE 7]>
+  <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8">
+    <![endif]-->
+    <!--[if IE 8]>
+    <html lang="en" ng-app="myApp" class="no-js lt-ie9">
+      <![endif]-->
+      <!--[if gt IE 8]>
+      <!-->
+
+      <html lang="en" ng-app="hotelAdvisor" class="no-js">
+        <!--<![endif]-->
+<head>
+        <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <style type="text/css">
+        .blue {
+          color: blue;
+        }
+
+        .red{
+          color: red;
+        }
+
+        .ng-cloak {
+          display: none !important
+        }
+        </style>
+</head>
+<body ng-controller="hotelsController" >
+        <div>
+          Search :
+          <input type="text" ng-model="searchTerm" />
+        </div>
+        <br/>
+        <br/>
+
+        <div>{{message}}</div>
+
+        <div ng-repeat="hotel in hotels | filter: searchTerm | orderBy : 'rating' : true ">
+          <div ng-class-even="blueClass" ng-class-odd="'red'" >
+            <div ng-bind="hotel.name | uppercase | limitTo : 4"></div>
+            <div ng-bind="hotel.price | currency"></div>
+            <div ng-bind="hotel.rating | number : 1"></div>
+            <div >{{Hotel}}</div>
+
+            <div>
+              <img ng-src="img/{{hotel.image}}" width="50px"></div>
+            <div>
+              <span ng-show="!showMore">{{hotel.description | uppercase | wordlimit : 3 | lowercase | uppercase | wordlimit: 2}}</span>
+              <span ng-show="showMore">{{hotel.description}}</span>
+              <span ng-show="hotel.description.length >50 && !showMore">...</span>
+              <a href="" ng-show="!showMore" ng-click="showMore=true;" ng-show="hotel.description.length >50">more</a>
+            </div>
+            <div>
+              <button ng-click="upvote(hotel)">up</button >
+              <button ng-click="downvote(hotel)">down</button>
+            </div>
+            <hr/>
+          </div>
+        </div>
+
+        <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+      -->
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="script.js"></script>
+</body>
+    </html>

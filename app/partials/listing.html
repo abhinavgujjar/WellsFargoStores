@@ -1,0 +1,18 @@
+	<div class="container-fluid fluid "  >
+		<div ng-repeat="hotel in hotels">
+			<div class="row">
+				<div class="col-md-2">
+					<img ng-src="http://i.imgur.com/{{hotel.image}}" width="70px"></div>
+				<div class="col-md-2">{{hotel.name}}</div>
+				<div class="col-md-3">{{hotel.location}}</div>
+				<div class="col-md-5">
+					<span ng-show="!showMore">
+						{{hotel.description | uppercase | wordlimit  | lowercase | uppercase | wordlimit: 2}}
+					</span>
+					<span ng-show="showMore">{{hotel.description}}</span>
+					<span ng-show="hotel.description.length >50 && !showMore">...</span>
+					<a href="" ng-show="!showMore" ng-click="showMore=true;" ng-show="hotel.description.length >50">more</a>
+				</div>
+			</div>
+			<hr/>	
+		</div>
